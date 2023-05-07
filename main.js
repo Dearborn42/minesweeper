@@ -29,31 +29,51 @@ function createMap(){
     }
 }
 
-function firstClick(start){
+function getWidth(start){
     let y = parseInt(start[0]);
     let x = parseInt(start[1]);
-    console.table(map);
+    let widthStart = x;
+    let widthEnd = x;
 
-    while(x < 20){
-        console.log(y + " " + x);
-        if(map[y][x] == 0){
-            $(`.main-box div[value="${y},${x}"]`).removeClass("bg-black bg-dark").addClass("bg-white cleared-tiles");
-            x++;
-        }else{
-            x--;
-            break;
-        }
+    for (let i = x; i < 20; i++) {
+        if (map[y][i] == 0) widthStart++;
+        else break;
     }
-    while(x >= 0){
-        console.log(y + " " + x);
-        if(map[y][x] == 0){
-            $(`.main-box div[value="${y},${x}"]`).removeClass("bg-black bg-dark").addClass("bg-white cleared-tiles");
-            x--;
-        }else{
-            break;
-        }
+    for (let i = x - 1; i >= 0; i--) {
+        if (map[y][i] == 0) widthEnd--;
+        else break;
     }
 
+    return [widthStart, widthEnd];
+}
+function getHeight(start){
+    let y = parseInt(start[0]);
+    let x = parseInt(start[1]);
+    let heightStart = y;
+    let heightEnd = y;
+
+    for(let i=y; i<20; i++){
+        if(map[i][x] == 0) heightStart++;
+        else break;
+    }
+    for(let i=y-1; i>=0; i--) {
+        if(map[i][x] == 0) heightEnd--;
+        else break;
+    }
+    return [heightStart, heightEnd];
+}
+
+function createShape(start){
+    let heights = getHeight(start);
+    let widths = getWidth(start);
+
+    for(let i=heights[1]; i<heights[0]; i++){
+        for(let j=widths[1]; j<widths[0]; j++){
+            if(map[i][j] == 0){
+                $(`.main-box div[value="${i},${j}"]`).removeClass("bg-black bg-dark").addClass("bg-white cleared-tiles");
+            }
+        }
+    }
 }
 
 $(function() {
@@ -63,12 +83,13 @@ $(function() {
     mainBox.on("click", "div", function() {
         let tile = $(this).attr("value").split(",");
         if(clicks == 0){
-            firstClick(tile)
+            createShape(tile);
             clicks++;
         }else{
             if(map[parseInt(tile[0])][parseInt(tile[1])] == 0)
                 $(this).removeClass("bg-black bg-dark").addClass("bg-white cleared-tiles");
             else
+                clicks--;
                 mainBox.empty();
                 createMap();
         }

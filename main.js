@@ -13,6 +13,8 @@ function createMap(){
         var x = j % 2 === 1;
         var colorClass = y ? (x ? "black" : "dark") : (x ? "dark" : "black");
         var box = $("<div>", {class: `h-100 w-100 bg-${colorClass}`}).attr("value", `${i},${j}`);
+        var pTag = $("<p>", {class: "toggle"}).text("");
+        box.append(pTag);
         mainBox.append(box);
         }
     }
@@ -71,9 +73,24 @@ function createShape(start){
         for(let j=widths[1]; j<widths[0]; j++){
             if(map[i][j] == 0){
                 $(`.main-box div[value="${i},${j}"]`).removeClass("bg-black bg-dark").addClass("bg-white cleared-tiles");
+                $(`.main-box div[value="${i},${j}"]`).find("p").text(assignValues(i, j)).removeClass("toggle");
             }
         }
     }
+}
+
+function assignValues(y, x){
+    let count = 0;
+    for(let i=y-1; i<y+2; i++){
+        for(let j=x-1; j<x+2; j++){
+            if(i>-1 && i<map.length && j<map[i].length && j>-1){
+                if(map[i][j]==1){
+                    count++;
+                }
+            }
+        }
+    }
+    return count;
 }
 
 $(function() {
@@ -86,13 +103,17 @@ $(function() {
             createShape(tile);
             clicks++;
         }else{
-            if(map[parseInt(tile[0])][parseInt(tile[1])] == 0)
+            if(map[parseInt(tile[0])][parseInt(tile[1])] == 0){
                 $(this).removeClass("bg-black bg-dark").addClass("bg-white cleared-tiles");
-            else{
+                $(this).find("p").text(assignValues(parseInt(tile[0]), parseInt(tile[1]))).removeClass("toggle");
+            }else{
                 clicks--;
                 mainBox.empty();
                 createMap();
             }
         }
     });
+    mainBox.on("dbclick", ()=>{
+        $(this).removeClass("bg-dark bg-black").addClass("bg-danger");
+    })
 });

@@ -12,3 +12,7 @@
 .cleared-tiles{
     border: .5px solid red;
 }
+
+.toggle{
+    display: none;
+}

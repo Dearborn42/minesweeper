@@ -88,10 +88,11 @@ $(function() {
         }else{
             if(map[parseInt(tile[0])][parseInt(tile[1])] == 0)
                 $(this).removeClass("bg-black bg-dark").addClass("bg-white cleared-tiles");
-            else
+            else{
                 clicks--;
                 mainBox.empty();
                 createMap();
+            }
         }
     });
 });

@@ -5,8 +5,8 @@
 
 .main-box {
     display: grid;
-    grid-template-rows: repeat(20, 1fr);
-    grid-template-columns: repeat(20, 1fr);
+    grid-template-rows: repeat(20, auto);
+    grid-template-columns: repeat(20, auto);
 }
 
 .cleared-tiles{
@@ -15,4 +15,13 @@
 
 .toggle{
     display: none;
+}
+
+.c-100{
+    width: 25px;
+    height: 25px;
+}
+
+.cw{
+    width: 500px;
 }

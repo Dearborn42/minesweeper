@@ -12,7 +12,7 @@ function createMap(){
         var y = i % 2 === 1;
         var x = j % 2 === 1;
         var colorClass = y ? (x ? "black" : "dark") : (x ? "dark" : "black");
-        var box = $("<div>", {class: `h-100 w-100 bg-${colorClass}`}).attr("value", `${i},${j}`);
+        var box = $("<div>", {class: `c-100 bg-${colorClass}`}).attr("value", `${i},${j}`);
         var pTag = $("<p>", {class: "toggle"}).text("");
         box.append(pTag);
         mainBox.append(box);

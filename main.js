@@ -284,4 +284,71 @@ cakeRecipe.set('sugar', '2 cups');
 cakeRecipe.set('eggs', '2 large');
 cakeRecipe.delete('vanilla extract');
 cakeRecipe.set('chocolate', '1 bar');
-console.log(cakeRecipe);
+
+// let obj = {
+//     name: 'Andrew',
+//     age: 34,
+//     date: '2012',
+//     tv_show: 'X-Files'
+// }
+
+// let people = new Map(Object.entries(obj));
+
+// using map.values and map.keys
+// let keys = Array.from(people.keys());
+// let values = Array.from(people.values());
+// for(let i=0; i<people.size; i++){
+//     let entry = [keys[i], values[i]];
+//     console.log(entry);
+// }
+// or
+// let keys = [];
+// let vals = []; 
+// for(let key of people.keys()){
+//     keys.push(key);
+// }
+// for(let val of people.values()){
+//     vals.push(val);
+// }
+// for(let i=0; i<people.size; i++){
+//     let entry = `-${keys[i]}: ${vals[i]}`;
+//     console.log(entry);
+// }
+// or
+// for(let entry of people.entries()){
+//     console.log(entry);
+// }
+
+
+let megatron = new Map([
+    ['Name', 'Megatron'],
+    ['ID', '128y72465'],
+    ['Team', 'Decepticon'],
+    ['Kills', ''],
+    ['Deaths', '5'],
+    ['Movies', '6'],
+    ['Degree', ''],
+    ['LEDs', '40221'],
+    ['Favorite Animal', 'rabbits'],
+    ['Favorite Food', ''],
+]);
+
+// for(let index of megatron.entries()){
+//     if(index[1] != '') console.log(`-${index[0]}: ${index[1]}`);
+// }
+
+// let set = new Set();
+// let visitors = ['john', 'jim', 'jack', 'jane', 'jill', 'robert', 'john', 'jill', 'jane', 'jim', 'jim', 'jill'];
+// for(let i=0; i< visitors.length; i++){
+//     set.add(visitors[i])
+// }
+// for(let name of set){
+//     console.log(name);
+// }
+// console.log(set);
+// console.log(set.size);
+
+
+let cakeObj = Object.fromEntries(cakeRecipe.entries());
+cakeObj = JSON.stringify(cakeObj)
+console.log(cakeObj); 
